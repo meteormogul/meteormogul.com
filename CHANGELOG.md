@@ -1,5 +1,9 @@
 # Changelog for meteormogul.com
 
+## [0.0.3] - 2018-03-20
+
+- Starting to add content
+
 ## [0.0.2] - 2018-03-19
 
 - Testing with phantomjs in toolchain.

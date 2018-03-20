@@ -185,7 +185,8 @@
         <v-card>
           <mm-content-heading content-title="Orientation"></mm-content-heading>
           <v-card-text v-html="marked(mdText)"></v-card-text>
-          <v-card-actions>Home | Next</v-card-actions>
+          <v-card-actions><router-link to="/index.html">Home</router-link>
+             | <router-link to="/survivalguide.html">Next</router-link></v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
@@ -195,10 +196,9 @@
       <v-flex>
         <v-card>
           <mm-content-heading content-title="Survival Guide"></mm-content-heading>
-          <v-card-text>
-            <p>Survival Guide text</span></p>
-          </v-card-text>
-          <v-card-actions>Home | Next</v-card-actions>
+          <v-card-text v-html="marked(mdText)"></v-card-text>
+          <v-card-actions><router-link to="/index.html">Home</router-link>
+             | Next</v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
@@ -284,7 +284,7 @@
               <a>Help&nbsp;Wanted</a>
             </v-card-text>
             <v-card-actions class="grey lighten-2 justify-center">
-              &copy;2018 — <strong>Meteor Mogul</strong>
+              &copy;2018 - <strong>Meteor Mogul</strong>
             </v-card-actions>
           </v-card>
         </v-layout>
@@ -383,7 +383,7 @@ $ meteor
       <mm-footer></mm-footer>
     </v-app>
   </script>
-  <script type="text/javascript">__meteor_runtime_config__ = JSON.parse(decodeURIComponent("%7B%22meteorRelease%22%3A%22METEOR%401.6.1%22%2C%22meteorEnv%22%3A%7B%22NODE_ENV%22%3A%22development%22%2C%22TEST_METADATA%22%3A%22%7B%7D%22%7D%2C%22PUBLIC_SETTINGS%22%3A%7B%7D%2C%22ROOT_URL%22%3A%22http%3A%2F%2Flocalhost%3A3000%2F%22%2C%22ROOT_URL_PATH_PREFIX%22%3A%22%22%2C%22appId%22%3A%22jcttvw15raqn.hk6of31xi3zl%22%2C%22autoupdateVersion%22%3A%22efd60e49f8783249455a15f45dfb635ebfa2dd5b%22%2C%22autoupdateVersionRefreshable%22%3A%224a74939f26fd606ec328f87d6a4cae0bc655de1e%22%2C%22autoupdateVersionCordova%22%3A%22none%22%7D"))</script>
+  <script type="text/javascript">__meteor_runtime_config__ = JSON.parse(decodeURIComponent("%7B%22meteorRelease%22%3A%22METEOR%401.6.1%22%2C%22meteorEnv%22%3A%7B%22NODE_ENV%22%3A%22development%22%2C%22TEST_METADATA%22%3A%22%7B%7D%22%7D%2C%22PUBLIC_SETTINGS%22%3A%7B%7D%2C%22ROOT_URL%22%3A%22http%3A%2F%2Flocalhost%3A3000%2F%22%2C%22ROOT_URL_PATH_PREFIX%22%3A%22%22%2C%22appId%22%3A%22jcttvw15raqn.hk6of31xi3zl%22%2C%22autoupdateVersion%22%3A%2278a4db1377b10e449e01cdd48b60a36f79b4bafc%22%2C%22autoupdateVersionRefreshable%22%3A%224a74939f26fd606ec328f87d6a4cae0bc655de1e%22%2C%22autoupdateVersionCordova%22%3A%22none%22%7D"))</script>
 
   <script type="text/javascript" src="/packages/meteor.js"></script>
   <script type="text/javascript" src="/packages/meteor-base.js"></script>
