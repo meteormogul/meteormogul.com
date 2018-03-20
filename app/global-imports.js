@@ -3,6 +3,10 @@
 Vue = Package['meteormogul:vue-dist'].Vue;
 Vuetify = Package['meteormogul:vuetify-dist'].Vuetify;
 VueRouter = Package['meteormogul:vue-router-dist'].VueRouter;
+Session = Package.session.Session;
+Tracker = Package.tracker.Tracker;
+Deps = Package.tracker.Deps;
+Showdown = Package.markdown.Showdown;
 Meteor = Package.meteor.Meteor;
 global = Package.meteor.global;
 meteorEnv = Package.meteor.meteorEnv;

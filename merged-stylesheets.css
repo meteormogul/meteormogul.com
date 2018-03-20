@@ -12231,3 +12231,12 @@ table.table tfoot tr td {
   /* Support for IE. */
   font-feature-settings: 'liga';
 }/* CSS declarations go here */
+
+/*
+  Set margin on lists for markdown text.
+  Otherwise, lists end up left of paragraphs.
+*/
+ol, ul {
+  margin-left: 15px;
+  margin-bottom: 16px;
+}
