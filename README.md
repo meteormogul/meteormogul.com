@@ -1,9 +1,8 @@
 # meteormogul.com
-Static website files for the Meteor Mogul project.
 
 ## What
 
-This is the static single-page app bundle for publication to www.meteormogul.com.
+The static single-page app bundle for publication to [www.meteormogul.com](https://meteormogul.netlify.com/#/) hosted by [Netlify](https://www.netlify.com/).
 
 ## Why
 
@@ -21,4 +20,4 @@ Publication steps:
 
 ## Demo
 
-[www.meteormogul.com](https://www.meteormogul.com/)
+[www.meteormogul.com](https://meteormogul.netlify.com/#/)

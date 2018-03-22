@@ -1,5 +1,10 @@
 # Changelog for meteormogul.com
 
+## [0.0.5] - 2018-03-22
+
+- Moved from meteor-mogul group account repo to meteormogul individual account repo
+- This makes it easier to publish on Netlify
+
 ## [0.0.4] - 2018-03-22
 
 - First complete draft
