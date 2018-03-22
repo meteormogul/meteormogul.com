@@ -1,5 +1,9 @@
 # Changelog for meteormogul.com
 
+## [0.0.4] - 2018-03-22
+
+- First complete draft
+
 ## [0.0.3] - 2018-03-20
 
 - Starting to add content
