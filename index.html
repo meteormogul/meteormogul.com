@@ -19,24 +19,7 @@
 
 <script src="/packages/es5-shim/es5-shim-sham.js"></script>
 </head>
-<body><script type="text/x-template" id="mm-content-article-template">
-    <v-card>
-      <!-- Pass down title prop to mm-content-heading template -->
-      <mm-content-heading :content-title="title"></mm-content-heading>
-      <!-- marked is a method that returns markdown parsed to HTML -->
-      <v-card-text v-html="marked(mdText)"></v-card-text>
-      <v-divider></v-divider>
-      <v-card-actions>
-        <router-link to="/index.html">Home</router-link>
-        <v-spacer></v-spacer>
-        <router-link v-if="prevLink" :to="prevLink">Prev</router-link>
-        <!-- show a | only if both prev and next links are set -->
-        <span v-if="prevLink && nextLink">|</span>
-        <router-link v-if="nextLink" :to="nextLink">Next</router-link>
-      </v-card-actions>
-    </v-card>
-  </script>
-<script type="text/x-template" id="mm-content-heading-template">
+<body><script type="text/x-template" id="mm-content-heading-template">
     <v-card-media
       src="/img/debbie-frith-564432-unsplash.jpg"
       height="96px">
@@ -54,6 +37,23 @@
         </v-layout>
       </v-container>
     </v-card-media>
+  </script>
+<script type="text/x-template" id="mm-content-article-template">
+    <v-card>
+      <!-- Pass down title prop to mm-content-heading template -->
+      <mm-content-heading :content-title="title"></mm-content-heading>
+      <!-- marked is a method that returns markdown parsed to HTML -->
+      <v-card-text v-html="marked(mdText)"></v-card-text>
+      <v-divider></v-divider>
+      <v-card-actions>
+        <router-link to="/index.html">Home</router-link>
+        <v-spacer></v-spacer>
+        <router-link v-if="prevLink" :to="prevLink">Prev</router-link>
+        <!-- show a | only if both prev and next links are set -->
+        <span v-if="prevLink && nextLink">|</span>
+        <router-link v-if="nextLink" :to="nextLink">Next</router-link>
+      </v-card-actions>
+    </v-card>
   </script>
 <script type="text/x-template" id="mm-content-home-template">
     <v-layout>
@@ -126,38 +126,55 @@
       <v-card-text v-html="marked(mdText)"></v-card-text>
     </v-card>
   </script>
-<script type="text/x-template" id="mm-menu-create-template">
+<script type="text/x-template" id="mm-breadcrumbs-template">
+    <span><router-link to="/">Home</router-link> {{ this.$route.path }}</span>
+  </script>
+<script type="text/x-template" id="mm-menu-template">
     <v-menu open-on-hover bottom offset-y>
-      <v-btn slot="activator" :style="samecase">Create</v-btn>
+      <v-btn slot="activator" :style="samecase">{{ title }}</v-btn>
       <v-list>
-        <v-subheader inset>GitHub Repos</v-subheader>
-        <v-list-tile v-for="repo in repos" :key="repo.href">
-          <v-list-tile-title><a :href="repo.href" target="_blank">{{ repo.title }}</a></v-list-tile-title>
+        <v-subheader inset>{{ subhead }}</v-subheader>
+        <v-list-tile v-for="item in items" :key="item.href">
+          <v-list-tile-title>
+            <!--
+              Link type depends on target.
+              _blank = <a href="">
+              router = <router-link to="">
+            -->
+            <a
+            v-if="item.target == '_blank'"
+            :href="item.href"
+            target="_blank">{{ item.title }}</a>
+            <router-link
+            v-if="item.target == 'router'"
+            :to="item.href">{{ item.title}}</router-link>
+            <span v-if="!item.target">{{ item.title}}</span>
+          </v-list-tile-title>
         </v-list-tile>
       </v-list>
     </v-menu>
   </script>
-<script type="text/x-template" id="mm-menu-learn-template">
-    <v-menu open-on-hover bottom offset-y>
-      <v-btn slot="activator" :style="samecase">Learn</v-btn>
-      <v-list>
-        <v-subheader inset>Documentation</v-subheader>
-        <v-list-tile v-for="doc in docs" :key="doc.title">
-          <v-list-tile-title><router-link :to="doc.href">{{ doc.title }}</router-link></v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-menu>
-  </script>
-<script type="text/x-template" id="mm-menu-play-template">
-    <v-menu open-on-hover bottom offset-y>
-      <v-btn slot="activator" :style="samecase">Play</v-btn>
-      <v-list>
-        <v-subheader inset>Menagerie of Heroku Demos</v-subheader>
-        <v-list-tile v-for="demo in demos" :key="demo.href">
-          <v-list-tile-title><a :href="demo.href" target="_blank">{{ demo.title }}</a></v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-menu>
+<script type="text/x-template" id="mm-quickstart-template">
+    <v-expansion-panel dark>
+      <v-expansion-panel-content>
+        <div slot="header">Quick Start <v-icon>directions_run</v-icon></div>
+        <v-card>
+          <v-card-text class="grey lighten-3 black--text">
+            <ol>
+              <li>Install <a href="https://git-scm.com/" target="_blank"><code>git</code></a> if necessary (on MacOS you probably already have it).</li>
+              <li>Install <a href="https://www.meteor.com/" target="_blank"><code>meteor</code></a>.</li>
+              <li>From a shell, clone and launch a Meteor Mogul app. For example:<br />
+                <code>
+$ git clone https://github.com/meteor-mogul/mogul-helloworld.git/
+$ cd mogul-helloworld
+$ meteor npm install
+$ meteor
+                </code></li>
+            </ol>
+          </v-card-text>
+        </v-card>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
   </script>
 <script type="text/x-template" id="mm-content-template">
       <v-content app>
@@ -168,8 +185,7 @@
                 <v-icon large slot="activator">home</v-icon>
                 <span>Return to Home Page</span>
               </v-tooltip></router-link>
-              <!-- Use handlebars for displaying data. -->
-              {{ breadcrumbs }}
+              <mm-breadcrumbs></mm-breadcrumbs>
             </v-flex>
           </v-layout>
           <v-layout>
@@ -177,7 +193,7 @@
               <!-- VueRouter will replace <router-view> based on route. -->
               <router-view></router-view>
             </v-flex>
-        </v-layout>
+          </v-layout>
         </v-container>
       </v-content>
   </script>
@@ -212,7 +228,7 @@
          visibleDrawer is a reactive Session variable to make it easier to toggle
          display of navigation drawer from any component, such as the toolbar.
          The navigation drawer itself, however, can also toggle its state by
-         receiving a true or false input.  The recordDrawer method captures that
+         receiving a true or false input.  The recordDrawer() method captures that
          event and does a Session.set so that other components know the state
          of the navigation drawer.
        -->
@@ -222,8 +238,8 @@
     :value="visibleDrawer"
     @input="recordDrawer($event)"
     >
-        <div style="font-size: 120%; font-weight: bold; background: #333333; color: white; text-align: right; padding-right: 4px;">Meteor Mogul</div>
-        <div style="background: #333333; color: white; text-align: right; padding-right: 4px;">Alta release</div>
+        <div class="mm-title">Meteor Mogul</div>
+        <div class="mm-subtitle">Alta release</div>
       <mm-quickstart></mm-quickstart>
       <v-list>
         <v-subheader inset>Documentation</v-subheader>
@@ -241,28 +257,6 @@
       </v-list>
     </v-navigation-drawer>
   </script>
-<script type="text/x-template" id="mm-quickstart-template">
-    <v-expansion-panel dark>
-      <v-expansion-panel-content>
-        <div slot="header">Quick Start <v-icon>directions_run</v-icon></div>
-        <v-card>
-          <v-card-text class="grey lighten-3 black--text">
-            <ol>
-              <li>Install <a href="https://git-scm.com/" target="_blank"><code>git</code></a> if necessary (on MacOS you probably already have it).</li>
-              <li>Install <a href="https://www.meteor.com/" target="_blank"><code>meteor</code></a>.</li>
-              <li>From a shell, clone and launch a Meteor Mogul app. For example:<br />
-                <code>
-$ git clone https://github.com/meteor-mogul/mogul-helloworld.git/
-$ cd mogul-helloworld
-$ meteor npm install
-$ meteor
-                </code></li>
-            </ol>
-          </v-card-text>
-        </v-card>
-      </v-expansion-panel-content>
-    </v-expansion-panel>
-  </script>
 <script type="text/x-template" id="mm-toolbar-template">
     <v-toolbar app dark color="primary">
       <v-tooltip bottom>
@@ -279,6 +273,12 @@ $ meteor
         <mm-menu-play></mm-menu-play>
         <mm-menu-create></mm-menu-create>
       </v-toolbar-items>
+      <!-- As an alternative to the above, could programmatically construct
+           menus from a list using child components and props.
+           Use data or a method to iterate over menus. -->
+      <!-- <v-toolbar-items v-for="menu in menus" :key="menu.name">
+        <mm-menu :title="menu.title" :subhead="menu.subhead" :items="menu.items" :target="menu.target"></mm-menu>
+      </v-toolbar-items> -->
     </v-toolbar>
   </script>
 <!-- Render target for Vue app.  Use id to identify. -->
@@ -288,7 +288,8 @@ $ meteor
   <!-- Since we're using static-html package to parse .html files,
        this template will be processed by VueJS and not Blaze. -->
   <!-- Each template must have one wrapping tag. -->
-  <!-- <mm-*> HTML tags are Vuetify components defined in ui folder. -->
+  <!-- <v-*> HTML tags are stock Vuetify components. -->
+  <!-- <mm-*> HTML tags are Meteor Mogul Vuetify components defined in client/ui folder. -->
   <!-- Wrap Vuetify app in a <v-app> tag. -->
   <script type="text/x-template" id="mm-app-template">
     <v-app id="mm-app">
@@ -298,7 +299,7 @@ $ meteor
       <mm-footer></mm-footer>
     </v-app>
   </script>
-  <script type="text/javascript">__meteor_runtime_config__ = JSON.parse(decodeURIComponent("%7B%22meteorRelease%22%3A%22METEOR%401.6.1%22%2C%22meteorEnv%22%3A%7B%22NODE_ENV%22%3A%22development%22%2C%22TEST_METADATA%22%3A%22%7B%7D%22%7D%2C%22PUBLIC_SETTINGS%22%3A%7B%7D%2C%22ROOT_URL%22%3A%22http%3A%2F%2Flocalhost%3A3000%2F%22%2C%22ROOT_URL_PATH_PREFIX%22%3A%22%22%2C%22appId%22%3A%22jcttvw15raqn.hk6of31xi3zl%22%2C%22autoupdateVersion%22%3A%2206dda8ae9c30bcf5ad1f15e89f64105fd3509f91%22%2C%22autoupdateVersionRefreshable%22%3A%224a74939f26fd606ec328f87d6a4cae0bc655de1e%22%2C%22autoupdateVersionCordova%22%3A%22none%22%7D"))</script>
+  <script type="text/javascript">__meteor_runtime_config__ = JSON.parse(decodeURIComponent("%7B%22meteorRelease%22%3A%22METEOR%401.6.1%22%2C%22meteorEnv%22%3A%7B%22NODE_ENV%22%3A%22development%22%2C%22TEST_METADATA%22%3A%22%7B%7D%22%7D%2C%22PUBLIC_SETTINGS%22%3A%7B%7D%2C%22ROOT_URL%22%3A%22http%3A%2F%2Flocalhost%3A3000%2F%22%2C%22ROOT_URL_PATH_PREFIX%22%3A%22%22%2C%22appId%22%3A%22jcttvw15raqn.hk6of31xi3zl%22%2C%22autoupdateVersion%22%3A%22782f3542f231115a26386fa27998633162892520%22%2C%22autoupdateVersionRefreshable%22%3A%22117550c4f4300d2bd2b683b9c489de864b044491%22%2C%22autoupdateVersionCordova%22%3A%22none%22%7D"))</script>
 
   <script type="text/javascript" src="/packages/meteor.js"></script>
   <script type="text/javascript" src="/packages/meteor-base.js"></script>
